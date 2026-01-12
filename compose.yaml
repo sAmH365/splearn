@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: 'mysql:8.4.6'
+    environment:
+      - 'MYSQL_DATABASE=splearn'
+      - 'MYSQL_PASSWORD=secret'
+      - 'MYSQL_ROOT_PASSWORD=verysecret'
+      - 'MYSQL_USER=spring'
+    ports:
+      - '3335:3306'
