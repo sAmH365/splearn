@@ -1,7 +1,9 @@
 package com.system.splearn.domain;
 
 public record MemberRegisterRequest(
-    String email, String nickname, String password
+    String email,
+    String nickname,
+    String password
 ) {
 
 }
