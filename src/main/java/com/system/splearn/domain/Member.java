@@ -3,8 +3,6 @@ package com.system.splearn.domain;
 import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.*;
 
-import java.util.Objects;
-import java.util.regex.Pattern;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -22,12 +20,12 @@ public class Member {
 
   private Member() {};
 
-  public static Member create(MemberCreateRequest createRequest, PasswordEncoder passwordEncoder) {
+  public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
     Member member = new Member();
 
-    member.email = new Email(requireNonNull(createRequest.email()));
-    member.nickname = requireNonNull(createRequest.nickname());
-    member.passwordHash = requireNonNull(passwordEncoder.encode(createRequest.password()));
+    member.email = new Email(requireNonNull(registerRequest.email()));
+    member.nickname = requireNonNull(registerRequest.nickname());
+    member.passwordHash = requireNonNull(passwordEncoder.encode(registerRequest.password()));
 
     member.status = MemberStatus.PENDING;
 

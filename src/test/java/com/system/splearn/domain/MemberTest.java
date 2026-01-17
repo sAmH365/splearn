@@ -2,7 +2,6 @@ package com.system.splearn.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +24,11 @@ class MemberTest {
       }
     };
 
-    member = Member.create(new MemberCreateRequest("user1@splearn.app", "sam", "secret"), passwordEncoder);
+    member = Member.register(new MemberRegisterRequest("user1@splearn.app", "sam", "secret"), passwordEncoder);
   }
 
   @Test
-  void createMember() {
+  void registerMember() {
     assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
   }
 
@@ -110,9 +109,9 @@ class MemberTest {
 
   @Test
   void invalidEmail() {
-    assertThatThrownBy(() -> Member.create(new MemberCreateRequest("invalidEmail", "sam", "secret"), passwordEncoder))
+    assertThatThrownBy(() -> Member.register(new MemberRegisterRequest("invalidEmail", "sam", "secret"), passwordEncoder))
         .isInstanceOf(IllegalArgumentException.class);
 
-    Member.create(new MemberCreateRequest("user1@gmail.com", "sam", "secret"), passwordEncoder);
+    Member.register(new MemberRegisterRequest("user1@gmail.com", "sam", "secret"), passwordEncoder);
   }
 }
