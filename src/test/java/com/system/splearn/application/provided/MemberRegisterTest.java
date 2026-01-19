@@ -1,8 +1,7 @@
 package com.system.splearn.application.provided;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 
 import com.system.splearn.application.MemberService;
 import com.system.splearn.application.required.EmailSender;
@@ -14,6 +13,8 @@ import com.system.splearn.domain.MemberStatus;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
 class MemberRegisterTest {
@@ -44,6 +45,21 @@ class MemberRegisterTest {
 
     assertThat(emailSenderMock.getTos()).hasSize(1);
     assertThat(emailSenderMock.getTos().getFirst()).isEqualTo(member.getEmail());
+  }
+
+  @Test
+  void registerTestMockito(){
+    EmailSender emailSenderMock = Mockito.mock(EmailSender.class);
+    MemberRegister register = new MemberService(
+        new MemberRepositoryStub(), emailSenderMock, MemberFixture.createPasswordEncoder()
+    );
+
+    Member member = register.register(MemberFixture.createMemberRegisterRequest());
+
+    assertThat(member.getId()).isNotNull();
+    assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
+
+    Mockito.verify(emailSenderMock).send(eq(member.getEmail()), any(), any());
   }
 
 
