@@ -9,6 +9,7 @@ import com.system.splearn.domain.Member;
 import com.system.splearn.domain.MemberFixture;
 import com.system.splearn.domain.MemberRegisterRequest;
 import com.system.splearn.domain.MemberStatus;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfiguration.class)
-public record MemberRegisterTest(
-    MemberRegister memberRegister
+record MemberRegisterTest(
+    MemberRegister memberRegister,
+    EntityManager entityManager
 ) {
   @Test
   void register() {
@@ -39,13 +41,26 @@ public record MemberRegisterTest(
   }
 
   @Test
-  void memberRegisterRequestFail() {
-    extracted(new MemberRegisterRequest("sam1@naver.com", "sam", "longsecret"));
-    extracted(new MemberRegisterRequest("sam1@naver.com", "Charlie__________________", "longsecret"));
-    extracted(new MemberRegisterRequest("sam1naver.com", "Charlie__________________", "longsecret"));
+  void activate(){
+    Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+    entityManager.flush();
+    entityManager.clear();
+
+    member = memberRegister.activate(member.getId());
+    entityManager.flush();
+
+    assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVE);
   }
 
-  private void extracted(MemberRegisterRequest invalid) {
+
+  @Test
+  void memberRegisterRequestFail() {
+    checkValidation(new MemberRegisterRequest("sam1@naver.com", "sam", "longsecret"));
+    checkValidation(new MemberRegisterRequest("sam1@naver.com", "Charlie__________________", "longsecret"));
+    checkValidation(new MemberRegisterRequest("sam1naver.com", "Charlie__________________", "longsecret"));
+  }
+
+  private void checkValidation(MemberRegisterRequest invalid) {
     assertThatThrownBy(() -> memberRegister.register(invalid))
     .isInstanceOf(ConstraintViolationException.class);
   }
