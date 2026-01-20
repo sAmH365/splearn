@@ -3,6 +3,7 @@ package com.system.splearn.domain;
 import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.*;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -10,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.EnumType;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,15 +23,9 @@ import org.hibernate.annotations.NaturalIdCache;
 @Entity
 @Getter
 @ToString
-@NaturalIdCache
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends AbstractEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  @Embedded
   @NaturalId
   private Email email;
 
@@ -36,7 +33,6 @@ public class Member {
 
   private String passwordHash;
 
-  @Enumerated(value = EnumType.STRING)
   private MemberStatus status;
 
   public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
