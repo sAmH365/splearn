@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.springframework.util.Assert.state;
 
 import com.system.splearn.domain.AbstractEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import java.time.LocalDateTime;
@@ -23,8 +24,10 @@ public class MemberDetail extends AbstractEntity {
   @Embedded
   private Profile profile;
 
+  @Column(columnDefinition = "TEXT")
   private String introduction;
 
+  @Column(nullable = false)
   private LocalDateTime registeredAt;
 
   private LocalDateTime activatedAt;
