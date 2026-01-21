@@ -1,14 +1,14 @@
-package com.system.splearn.application.provided;
+package com.system.splearn.application.member.provided;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.system.splearn.SplearnTestConfiguration;
-import com.system.splearn.domain.DuplicateEmailException;
-import com.system.splearn.domain.Member;
-import com.system.splearn.domain.MemberFixture;
-import com.system.splearn.domain.MemberRegisterRequest;
-import com.system.splearn.domain.MemberStatus;
+import com.system.splearn.domain.member.DuplicateEmailException;
+import com.system.splearn.domain.member.Member;
+import com.system.splearn.domain.member.MemberFixture;
+import com.system.splearn.domain.member.MemberRegisterRequest;
+import com.system.splearn.domain.member.MemberStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;

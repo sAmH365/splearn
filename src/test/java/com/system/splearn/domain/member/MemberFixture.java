@@ -1,4 +1,4 @@
-package com.system.splearn.domain;
+package com.system.splearn.domain.member;
 
 public class MemberFixture {
   public static MemberRegisterRequest createMemberRegisterRequest(String email) {

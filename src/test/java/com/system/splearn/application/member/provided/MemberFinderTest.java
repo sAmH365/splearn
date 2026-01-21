@@ -1,10 +1,10 @@
-package com.system.splearn.application.provided;
+package com.system.splearn.application.member.provided;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.system.splearn.SplearnTestConfiguration;
-import com.system.splearn.domain.Member;
-import com.system.splearn.domain.MemberFixture;
+import com.system.splearn.domain.member.Member;
+import com.system.splearn.domain.member.MemberFixture;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

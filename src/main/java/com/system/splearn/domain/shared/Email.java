@@ -1,7 +1,5 @@
-package com.system.splearn.domain;
+package com.system.splearn.domain.shared;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import java.util.regex.Pattern;
 
 public record Email(

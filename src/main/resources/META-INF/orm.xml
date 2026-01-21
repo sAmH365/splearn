@@ -15,7 +15,7 @@
     </attributes>
   </mapped-superclass>
 
-  <entity class="com.system.splearn.domain.Member">
+  <entity class="com.system.splearn.domain.member.Member">
     <table name="member">
       <unique-constraint name="UK_MEMBER_EMAIL_ADDRESS">
         <column-name>email_address</column-name>
@@ -45,7 +45,7 @@
     </attributes>
   </entity>
 
-  <embeddable class="com.system.splearn.domain.Email">
+  <embeddable class="com.system.splearn.domain.shared.Email">
     <attributes>
       <basic name="address">
         <column name="email_address" nullable="false" length="150"/>

@@ -1,9 +1,8 @@
 package com.system.splearn.adapter.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import com.system.splearn.domain.Email;
+import com.system.splearn.domain.shared.Email;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;
 import org.junitpioneer.jupiter.StdOut;

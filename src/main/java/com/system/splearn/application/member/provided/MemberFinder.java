@@ -1,6 +1,6 @@
-package com.system.splearn.application.provided;
+package com.system.splearn.application.member.provided;
 
-import com.system.splearn.domain.Member;
+import com.system.splearn.domain.member.Member;
 
 public interface MemberFinder {
 

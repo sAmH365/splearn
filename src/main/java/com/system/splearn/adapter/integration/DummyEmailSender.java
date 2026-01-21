@@ -1,7 +1,7 @@
 package com.system.splearn.adapter.integration;
 
-import com.system.splearn.application.required.EmailSender;
-import com.system.splearn.domain.Email;
+import com.system.splearn.application.member.required.EmailSender;
+import com.system.splearn.domain.shared.Email;
 import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;
 
